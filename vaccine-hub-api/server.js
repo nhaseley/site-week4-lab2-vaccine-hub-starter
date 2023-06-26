@@ -3,10 +3,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 const morgan = require("morgan")
-const { BadRequestError} = require("./utils/errors");
-const { NotFoundError } = require("./utils/errors");
+const { BadRequestError, NotFoundError} = require("./utils/errors");
 // const PORT = process.env.PORT || 3001;
 const { PORT } = require("../vaccine-registration-ui/config")
+const authRoutes = require("./routes/auth")
 
 // enables cross-origin resource sharing for all origins
 app.use(cors())
@@ -20,6 +20,8 @@ app.use(morgan("tiny"))
 app.use((req, res, next) =>{
     return next(new NotFoundError)
 })
+
+app.use("/auth", authRoutes)
 
 app.use((err, req, res, next) =>{
     const status = err.status || 500
