@@ -1,5 +1,5 @@
 const { Client} = require("pg")
-const {getdatabaseUri} = require(".config")
+const {getDatabaseUri} = require("../vaccine-registration-ui/config")
 const db = new Client({connectionString: getDatabaseUri()})
 
 db.connect((err) => {

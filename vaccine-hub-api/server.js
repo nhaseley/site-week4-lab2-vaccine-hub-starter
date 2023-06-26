@@ -17,8 +17,8 @@ app.use(express.json())
 // log request info
 app.use(morgan("tiny"))
 
-app.use((req, res, next) =>{
-    return next(new NotFoundError)
+app.use((req, res, next) => {
+    return next (new NotFoundError())
 })
 
 app.use("/auth", authRoutes)
