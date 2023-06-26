@@ -3,13 +3,20 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 const morgan = require("morgan")
-const { BadRequestError} = require("./utils/error");
-const { NotFoundError } = require("../../site-week3-lab1-gift-giver-starter/utils/errors");
-const PORT = 3010;
+const { BadRequestError} = require("./utils/errors");
+const { NotFoundError } = require("./utils/errors");
+// const PORT = process.env.PORT || 3001;
+const { PORT } = require("../vaccine-registration-ui/config")
+
+// enables cross-origin resource sharing for all origins
+app.use(cors())
+
+// parse including request bodies with JSON payloads
 app.use(express.json())
 
-
+// log request info
 app.use(morgan("tiny"))
+
 app.use((req, res, next) =>{
     return next(new NotFoundError)
 })
