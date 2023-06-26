@@ -1,6 +1,13 @@
 // const pool = require("../database");
 const {BadRequestError, UnauthorizedError }= require("../utils/errors")
 const db = require("../db")
+const bcrypt = require("bcrypt")
+const pw = "supersecretpassword"
+
+bcrypt.hash(pw, 6, (err, hashedPw) => {
+    console.log(`Password is $(pw)`)
+    console.log(`Hashed Password is $(hashedPw)`)
+})
 
 class User{
     
@@ -39,13 +46,13 @@ class User{
         if (credentials.email.indexOf("@") <= 0){
             throw new BadRequestError("Invalid email.")
         }
-        
+
         const existingUser = await User.fetchUserByEmail(credentials.email)
         if (existingUser){
             throw new BadRequestError[`Dupplicate email: ${credentials.email}`]
         }
         
-        const lowercaseEmail = credentials.email.toLowerCase()
+        const lowercasedEmail = credentials.email.toLowerCase()
         const result = await db.query(`
             INSERT INTO users (
                 email,
