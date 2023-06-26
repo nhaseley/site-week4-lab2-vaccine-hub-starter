@@ -1,5 +1,6 @@
 -- this file will contain the SQL needd to create the database
-
+\echo 'Delete and recreate vaccine hub db?'
+\prompt 'Return for yes or control-C to cancel > ' answer
 
 -- drop the vaccine_hub database
 DROP DATABASE vaccine_hub;
@@ -8,7 +9,7 @@ DROP DATABASE vaccine_hub;
 CREATE DATABASE vaccine_hub;
 
 -- connect to the vaccine_hub database
-USE vaccine_hub;
+\connect vaccine_hub;
 
 -- run the vaccine-hub-schema.sql script
-:r vaccine-hub-schema.sql;
+\i vaccine-hub-schema.sql;
